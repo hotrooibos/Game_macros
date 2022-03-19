@@ -1,7 +1,10 @@
 ;
-;	Auto mining Terraria
-;	Lorsque activé, le bouton gauche de la souris est enclenché, et avance lentement vers la droite
-;	Activer/désactiver : touche F9
+; AHK v1 script for Terraria
+; Author : https://github.com/hotrooibos
+;
+; Auto mining
+; Lorsque activé, le bouton gauche de la souris est enclenché, et avance lentement vers la droite
+; Activer/désactiver : touche F9
 ;
 
 Toggle = 0

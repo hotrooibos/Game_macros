@@ -1,5 +1,6 @@
 ;
-; AHK Script for PoE
+; AHK v1 script for Path of Exile
+; Author : https://github.com/hotrooibos
 ;
 
 ; Hotkeys reminder :
@@ -32,6 +33,16 @@ MsgBox,64 ,Script raccourcis POE,
 ;	Fast stashing (ctrl clic)
 ;
 ^<::				; On pressing "Ctrl + <"  (" ^ for Ctrl, ^+ for CtrlShift)...
+	click			; ...simulate a mouse left clic
+	Sleep, 50
+return
+
+
+
+;
+;	Fast clicking (shift clic)
+;
++<::				; On pressing "Shift + <"
 	click			; ...simulate a mouse left clic
 	Sleep, 50
 return
@@ -84,25 +95,25 @@ return
 
 
 ;
-; Auto triggers while doing main attack
+; Auto triggers while doing main attack (Shift + left clic)
 ;
 
-#IfWinActive, Path of Exile
+; #IfWinActive, Path of Exile
 
-~SHIFT::
-	; Send {a} ; Send this key once
+; ~SHIFT::
+; 	; Send {a} ; Send this key once
 
-	if GetKeyState("LButton", "P") {
-		SendInput {t down} 	; Keep spamming General's cry
-		Sleep, 1000
+; 	if GetKeyState("LButton", "P") {
+; 		SendInput {t down} 	; Keep spamming General's cry
+; 		Sleep, 1000
 		
-		Send {r}			; Activate Berserk (2s later, in order to gain Rage with General's)
-		; Sleep, 100
-		; Send (e)			; Activate Blood Rage
-	}
-return
+; 		Send {r}			; Activate Berserk (2s later, in order to gain Rage with General's)
+; 		; Sleep, 100
+; 		; Send (e)			; Activate Blood Rage
+; 	}
+; return
 
-~LButton up::
-	SendInput {t up}
-return
+; ~LButton up::
+; 	SendInput {t up}
+; return
 

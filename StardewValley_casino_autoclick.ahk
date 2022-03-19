@@ -1,7 +1,9 @@
 ;
-;	Auto clic Stardew
-;	Lorsque activé, le bouton gauche de la souris est cliqué toutes les secondes
-;	Activer/désactiver : touche F9
+; AHK v1 script for Stardew Valley
+; Author : https://github.com/hotrooibos
+;
+; Lorsque activé, le bouton gauche de la souris est cliqué toutes les secondes
+; Activer/désactiver : touche F9
 ;
 
 Toggle = 0
