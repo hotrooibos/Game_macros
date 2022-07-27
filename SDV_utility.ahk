@@ -22,9 +22,6 @@ global toggle := 0				; init disabled
 F9:: {
 	global toggle := !toggle	; change toggle position
 
-	toggle (enabled);			; change toggle position
-
-
 	while (toggle) {
 		SendEvent "{Click}"		; left click (classic way)
 		Sleep 1000
