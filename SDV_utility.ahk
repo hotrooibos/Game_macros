@@ -47,3 +47,13 @@ F9:: {
     SendInput "{enter}"
     return
 }
+
+
+;
+;	Fast stashing (ctrl clic)
+;
+^<:: {				            ; On pressing "Ctrl + <"  (" ^ for Ctrl, ^+ for CtrlShift)...
+	SendEvent "{Click}"			; left click (classic way)
+	Sleep 50
+    return
+}
