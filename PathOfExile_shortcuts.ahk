@@ -1,5 +1,5 @@
 ;
-; AHK v1 script for Path of Exile
+; AHK v2 script for Path of Exile
 ; Author : https://github.com/hotrooibos
 ;
 
@@ -19,44 +19,43 @@
 ;   ^ 			-> Ctrl
 
 
-MsgBox,64 ,Script raccourcis POE,
-(LTrim
-	1- Fast stashing (Ctrl + <)
-	2- Chicken (Mouse4)
-	3- Auto flask trigger (Mouse middle btn)
-)
-, 20
+; #MaxThreadsPerHotkey 10
 
+; #HotIf WinActive("Path Of Exile")
+; SetTitleMatchMode 1
 
 
 ;
 ;	Fast stashing (ctrl clic)
 ;
-^<::				; On pressing "Ctrl + <"  (" ^ for Ctrl, ^+ for CtrlShift)...
-	click			; ...simulate a mouse left clic
-	Sleep, 50
-return
-
+; On pressing "Ctrl + <"  (" ^ for Ctrl, ^+ for CtrlShift)...
+; ...simulate a mouse left clic
+^<:: {
+	; SoundPlay A_WorkingDir . "\beep.mp3"
+	Click
+	Sleep 50
+	return
+}
 
 
 ;
 ;	Fast clicking (shift clic)
 ;
-+<::				; On pressing "Shift + <"
-	click			; ...simulate a mouse left clic
-	Sleep, 50
-return
-
+; On pressing "Shift + <" simulate a mouse left clic
++<:: {
+	click
+	Sleep 50
+	return
+}
 
 
 ;
 ;	Chicken : on Mbutton clic, send alt+F4
 ;
-#IfWinActive, Path of Exile
-XButton1::
-	Send !{F4}
-return
-
+XButton1:: {
+	SendInput "!{F4}"
+	return
+}
 
 
 
@@ -65,32 +64,31 @@ return
 ;
 
 ; Key 1 shortcut
-#IfWinActive, Path of Exile
-SC002::
-	Send {SC002}	; touche & (1)
-	Sleep, 210
+SC002:: {
+	SendInput "{SC002}"	; touche & (1)
+	Sleep 210
 
-	Send {SC003}	; touche é (2)
-	Sleep, 150
+	SendInput "{SC003}"	; touche é (2)
+	Sleep 150
 
-	Send {SC004}	; touche " (3)
-	Sleep, 120
+	SendInput "{SC004}"	; touche " (3)
+	Sleep 120
 
-	Send {SC005}	; touche ' (4)
-	Sleep, 120
+	SendInput "{SC005}"	; touche ' (4)
+	Sleep 120
 
-	Send {SC006}	; touche ' (5)
-return
+	SendInput "{SC006}"	; touche ' (5)
+	return
+}
 
 ; Key 2 shortcut
-#IfWinActive, Path of Exile
-SC003::
-	Send {a}
-	Sleep, 30
-	Send {z}
-	Sleep, 120
-return
-
+SC003:: {
+	SendInput "{a}"
+	Sleep 30
+	SendInput "{z}"
+	Sleep 120
+	return
+}
 
 
 
@@ -101,14 +99,14 @@ return
 ; #IfWinActive, Path of Exile
 
 ; ~SHIFT::
-; 	; Send {a} ; Send this key once
+; 	; SendInput "{a} ; Send this key once
 
 ; 	if GetKeyState("LButton", "P") {
 ; 		SendInput {t down} 	; Keep spamming General's cry
-; 		Sleep, 1000
+; 		Sleep 1000
 		
-; 		Send {r}			; Activate Berserk (2s later, in order to gain Rage with General's)
-; 		; Sleep, 100
+; 		SendInput "{r}			; Activate Berserk (2s later, in order to gain Rage with General's)
+; 		; Sleep 100
 ; 		; Send (e)			; Activate Blood Rage
 ; 	}
 ; return
