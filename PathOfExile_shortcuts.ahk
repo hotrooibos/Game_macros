@@ -19,10 +19,10 @@
 ;   ^ 			-> Ctrl
 
 
-; #MaxThreadsPerHotkey 10
+#MaxThreadsPerHotkey 10
 
-; #HotIf WinActive("Path Of Exile")
-; SetTitleMatchMode 1
+#HotIf WinActive("Path of Exile")
+SetTitleMatchMode 3
 
 
 ;
