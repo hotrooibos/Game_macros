@@ -91,12 +91,27 @@ SC003:: {
 }
 
 
+;
+; 3.19 Kalandra - RF build - auto trigger Enduring Cry (EC) while moving
+;
+~LButton:: {
+	While (GetKeyState("LButton", "P")) {
+		if (!KeyWait("LButton", "T0.5")) {  ; If LButton is pressed more than 0.5s ("long" press)
+			SendInput "{r down}"			; Keep spamming EC
+			Sleep 1000
+		}
+	}
+	
+	SendInput "{r up}"						; Release EC key
+return
+}
+
+
 
 ;
+; GENERAL'S CRY auto cry trigger
 ; Auto triggers while doing main attack (Shift + left clic)
 ;
-
-; #IfWinActive, Path of Exile
 
 ; ~SHIFT::
 ; 	; SendInput "{a} ; Send this key once
@@ -114,4 +129,3 @@ SC003:: {
 ; ~LButton up::
 ; 	SendInput {t up}
 ; return
-
