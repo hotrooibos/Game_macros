@@ -19,28 +19,14 @@
 ;   ^ 			-> Ctrl
 
 
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-; DISPLAY INFOS WINDOW ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
 MyGui := Gui()
-MyGui.SetFont("s20", "Impact")
+MyGui.SetFont("s20", "Consolas")
 MyGui.BackColor := "000"
-WinSetTransColor("000", MyGui)
-MyGui.opt("-Caption +AlwaysOnTop +ToolWindow")
-vararr := Map("P", "0", "BO", "120") ; Array contains the gui controls variables names and it values as 0.
-For key, val in vararr                                             ; Loop throw vararr array keys and values.
-    ; Gui, Add, Text, v%key%, %key% %val%                        ; Add the variable name and it value to the gui.
-	MyGui.Add("Text", "cc9d42e", key . ":" . val)
+WinSetTransColor("000 200", MyGui)
+MyGui.Opt("-Caption +AlwaysOnTop +ToolWindow")
 
-global visibleGui := 1
+global visibleGui := 0
 
-if (visibleGui = 1)
-{
-	MyGui.Show("NoActivate X420 Y180")  ; NoActivate avoids deactivating the currently active window.
-}
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -53,7 +39,7 @@ if (visibleGui = 1)
 ^<::
 {				            ; On pressing "Ctrl + <"  (" ^ for Ctrl, ^+ for CtrlShift)...
 	click			            ; ...simulate a mouse left clic
-	Sleep 50
+	Sleep 100
     return
 }
 
@@ -67,16 +53,94 @@ SC29::
 	Suspend
     ; Pause
 
-	if (visibleGui = 1) {
+	if (visibleGui = 1)
+	{
 		MyGui.Hide()
 		visibleGui := 0
-	} else {
+	}
+	else
+	{
 		MyGui.Show()
 		visibleGui := 1
 	}
     return
 }
 #SuspendExempt False
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; FUNCTIONS ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+; CTA precast
+global cnt
+; Warning : 
+global guiTexts := MyGui.Add("Text", "cc9d42e w500", "BO -")
+
+Precast(BoDuration, CastSpeed)
+{
+	global
+
+	MyGui.Show("NoActivate X80 Y30")	; NoActivate avoids deactivating the currently active window		
+
+	; SendInput("w")                ; Switch weapons
+	; Sleep 300
+	; SendInput "{F11}"            ; BATTLE COMMAND
+	; Sleep fcr
+	; SendInput "{F11}"            ; BATTLE COMMAND
+	; Sleep fcr
+	; SendInput "{F12}"            ; BATTLE ORDER
+	; ; Sleep fcr
+	; ; SendInput "w"                ; Switch weapons
+	; Sleep 300
+	
+	; SendInput(BoDuration)
+	cnt := BoDuration
+	SetTimer BoTimer, 1000
+}
+
+BoTimer()
+{
+	global
+
+	guiTexts.Value := "BO " . cnt
+
+	if (cnt = 20) {
+		SoundPlay A_WorkingDir . "\beep.mp3"
+	}
+
+	if (cnt < 4) {
+		SoundPlay A_WorkingDir . "\beep.mp3"
+	}
+
+	if (--cnt < 0) {
+		SetTimer BoTimer, 0
+		MyGui.Hide()
+	}
+
+	return
+}
+
+; ShowHideGui()
+; {
+; 	global
+
+; 	if (visibleGui = 1)
+; 	{
+; 		MyGui.Hide()
+; 		visibleGui := 0
+; 	}
+; 	else
+; 	{
+; 		global guiTexts := MyGui.Add("Text", "cc9d42e", "BO " . cnt)
+; 		MyGui.Show("NoActivate X80 Y30")	; NoActivate avoids deactivating the currently active window		
+; 		visibleGui := 1
+; 	}
+;     return
+; }
+
+
 
 
 ;
@@ -143,43 +207,3 @@ SC29::
 ; 	vararr["P"] := 8
 ; 	return
 ; }
-
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-; FUNCTIONS ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-; CTA precast
-global cnt
-
-CtaPrecast(fcr, BoDuration)
-{
-	SendInput("w")                ; Switch weapons
-	Sleep 300
-	SendInput "{F11}"            ; BATTLE COMMAND
-	Sleep fcr
-	SendInput "{F11}"            ; BATTLE COMMAND
-	Sleep fcr
-	SendInput "{F12}"            ; BATTLE ORDER
-	Sleep fcr
-	SendInput "w"                ; Switch weapons
-	Sleep 300
-	global cnt := BoDuration
-	SetTimer BoTimer, 1000
-}
-
-BoTimer()
-{
-	global
-	If (cnt = 10) {
-		SoundPlay A_WorkingDir . "\beep.mp3"
-	}
-
-	; GuiControl,, BO, BO %cnt%
-
-	If (--cnt < 0) {
-		SetTimer BoTimer, 0
-	}
-	return
-}
