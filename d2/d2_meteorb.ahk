@@ -9,7 +9,7 @@
 #HotIf WinActive("Diablo II: Resurrected")
 SetTitleMatchMode 3
 
-#Include D2_shortcut_utility.ahk
+#Include utils.ahk
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

@@ -6,10 +6,10 @@
 #MaxThreadsPerHotkey 10
 ; DisplaySplash("AHK Script standard/generic for D2", 5000)
 
-; #HotIf WinActive("Diablo II: Resurrected")
-; SetTitleMatchMode 3
+#HotIf WinActive("Diablo II: Resurrected")
+SetTitleMatchMode 3
 
-#Include D2_shortcut_utility.ahk
+#Include utils.ahk
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -29,7 +29,7 @@ MButton::
     ; }
 
 	; Precast
-	Precast(25, 400)
+	Precast(370, 400)
 
 	SendInput "{F10}"										; HOLY SHIELD, FROZEN ARMOR, BONE ARMOR...
 	return
