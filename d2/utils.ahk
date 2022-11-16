@@ -1,5 +1,5 @@
 ;
-; AHK v2 beta3 Script for Diablo 2 Resurrected
+; AHK v2 beta14 Script for Diablo 2 Resurrected
 ; Author : https://github.com/hotrooibos
 ;
 
@@ -106,21 +106,32 @@ BoTimer()
 
 	guiTexts.Value := "BO " . cnt
 
-	if (cnt = 20) {
+	if (cnt = 20 or cnt < 4)
+	{
 		SoundPlay A_WorkingDir . "\beep.mp3"
 	}
 
-	if (cnt < 4) {
-		SoundPlay A_WorkingDir . "\beep.mp3"
-	}
+	; if (cnt = 10)
+	; {
+	; 	splash := Gui()
+	; 	splash.BackColor := "fefefe"
+	; 	WinSetTransColor("ffffff 100", splash)
+	; 	splash.Opt("-Caption +AlwaysOnTop +ToolWindow")
+	; 	splash.Show("NoActivate w500 h500")	; NoActivate avoids deactivating the currently active window		
+	; }
 
-	if (--cnt < 0) {
+	if (--cnt < 1)
+	{
 		SetTimer BoTimer, 0
 		MyGui.Hide()
 	}
 
+	; DllCall("FlashWindow",MyGui)
+
 	return
 }
+
+
 
 ; ShowHideGui()
 ; {

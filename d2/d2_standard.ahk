@@ -1,5 +1,5 @@
 ;
-; AHK v2 beta3 Script for Diablo 2 Resurrected
+; AHK v2 beta14 Script for Diablo 2 Resurrected
 ; Author : https://github.com/hotrooibos
 ;
 
@@ -28,7 +28,7 @@ MButton::
 	; 	Sleep(500)
     ; }
 
-	; Precast
+	; Precast (BO duration, cast speed)
 	Precast(370, 400)
 
 	SendInput "{F10}"										; HOLY SHIELD, FROZEN ARMOR, BONE ARMOR...
