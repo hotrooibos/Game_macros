@@ -11,6 +11,8 @@ SetTitleMatchMode 3
 
 #Include utils.ahk
 
+userTime := InputBox("Counter time (in second)")
+; MsgBox("Value = " userTime.Value,"Test","OK")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; MOUSE SHORTCUTS ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -19,7 +21,7 @@ SetTitleMatchMode 3
 ;
 ; Precast with Middle mouse btn
 ;
-MButton::   
+MButton::
 {
     ; if (toggle)
     ; {
@@ -28,10 +30,18 @@ MButton::
 	; 	Sleep(500)
     ; }
 
-	; Precast (BO duration, cast speed)
-	Precast(370, 400)
+	SendInput("w") 				; Switch weapons
+	Sleep 600
+	SendInput "{F7}"			; ES
+	Sleep 600
+	SendInput "{F6}"			; Frozen Armor
+	Sleep 600
+	SendInput("w")
 
-	SendInput "{F10}"										; HOLY SHIELD, FROZEN ARMOR, BONE ARMOR...
+	; Precast (BO duration, cast speed)
+
+	Precast(userTime.Value, 400)
+
 	return
 }
 

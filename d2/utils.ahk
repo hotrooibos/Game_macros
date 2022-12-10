@@ -91,11 +91,10 @@ Precast(BoDuration, CastSpeed)
 	; SendInput "{F11}"            ; BATTLE COMMAND
 	; Sleep fcr
 	; SendInput "{F12}"            ; BATTLE ORDER
-	; ; Sleep fcr
-	; ; SendInput "w"                ; Switch weapons
+	; Sleep fcr
+	; SendInput "w"                ; Switch weapons
 	; Sleep 300
 	
-	; SendInput(BoDuration)
 	cnt := BoDuration
 	SetTimer BoTimer, 1000
 }
