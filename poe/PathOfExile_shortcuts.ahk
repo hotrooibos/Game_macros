@@ -26,6 +26,18 @@ SetTitleMatchMode 3
 
 
 ;
+;	Suspend hotkeys with button ² (under Esc)
+;
+#SuspendExempt
+SC29::
+{
+	Suspend
+    return
+}
+#SuspendExempt False
+
+
+;
 ;	Fast stashing (ctrl clic)
 ;
 ; On pressing "Ctrl + <"  (" ^ for Ctrl, ^+ for CtrlShift)...
@@ -39,31 +51,20 @@ SetTitleMatchMode 3
 
 
 ;
-;	Fast clicking (shift clic)
+;	CHICKEN : on Mbutton clic, send alt+F4
 ;
-; On pressing "Shift + <" simulate a mouse left clic
-+<:: {
-	click
-	Sleep 100
+XButton1:: {
+	; SoundPlay A_WorkingDir . "\beep.mp3"
+	SendInput "!{F4}"
 	return
 }
 
 
 ;
-;	Chicken : on Mbutton clic, send alt+F4
-;
-; XButton1:: {
-; 	SendInput "!{F4}"
-; 	return
-; }
-
-
-
-;
-;	Auto flask triggers
+;	FLASKS trigger
 ;
 
-; Key 1 shortcut
+; Key 1 shortcuts
 SC002:: {
 	SendInput "{SC002}"	; touche & (1)
 	Sleep 210
@@ -82,47 +83,77 @@ SC002:: {
 }
 
 ; Key 2 shortcut
-SC003:: {
-	SendInput "{a}"
-	Sleep 30
-	SendInput "{z}"
-	Sleep 120
-	return
-}
+; SC003:: {
+; 	SendInput "{a}"
+; 	Sleep 30
+; 	SendInput "{z}"
+; 	Sleep 120
+; 	return
+; }
+
+
+
+
 
 
 ;
-; 3.19 Kalandra - RF build - auto trigger Enduring Cry (EC) while moving
+; 3.20 SANCTUM RUTHLESS
 ;
-~LButton:: {
-	While (GetKeyState("LButton", "P")) {
-		if (!KeyWait("LButton", "T0.5")) {  ; If LButton is pressed more than 0.5s ("long" press)
-			SendInput "{r down}"			; Keep spamming EC
-			Sleep 1000
-		}
+
+;
+; Auto trigger Guard skill (Molten Shell, IC, Steelskin...) when firing another skill 
+;
+~z::
+~a:: {
+		While (GetKeyState("a", "P")) or (GetKeyState("z", "P")) {		; 
+		; SendInput "{r down}"			; Fire the guard skill
+		; Sleep 600
+		SendInput "{t down}"			; Fire the guard skill
+		Sleep 1000
 	}
 	
-	SendInput "{r up}"						; Release EC key
+	; SendInput "{r up}"					; Release EC key
+	SendInput "{t up}"					; Release EC key
 return
 }
 
 
 
+
+
 ;
-; GENERAL'S CRY auto cry trigger
-; Auto triggers while doing main attack (Shift + left clic)
+; 3.19 KALANDRA
+;
+
+;
+; RF build - auto trigger Enduring Cry (EC) while moving
+;
+; ~LButton:: {
+; 	While (GetKeyState("LButton", "P")) {
+; 		if (!KeyWait("LButton", "T0.5")) {  ; If LButton is pressed more than 0.5s ("long" press)
+; 			SendInput "{r down}"			; Keep spamming EC
+; 			Sleep 1000
+; 		}
+; 	}
+	
+; 	SendInput "{r up}"						; Release EC key
+; return
+; }
+
+;
+; Auto triggers General's Cry (GC) while doing main attack (Shift + left clic)
 ;
 
 ; ~SHIFT::
-; 	; SendInput "{a} ; Send this key once
+; 	; SendInput "{a} 						; Send this key once
 
-; 	if GetKeyState("LButton", "P") {
-; 		SendInput {t down} 	; Keep spamming General's cry
+; 	if GetKeyState("LButton", "P") { 		; If maintaining Shift + left clic pressed
+; 		SendInput {t down} 					; Keep spamming GC
 ; 		Sleep 1000
 		
-; 		SendInput "{r}			; Activate Berserk (2s later, in order to gain Rage with General's)
+; 		SendInput "{r}						; Activate Berserk (2s later, in order to gain Rage with GC)
 ; 		; Sleep 100
-; 		; Send (e)			; Activate Blood Rage
+; 		; Send (e)							; Activate Blood Rage
 ; 	}
 ; return
 
