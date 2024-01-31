@@ -65,22 +65,22 @@ XButton1:: {
 ;
 
 ; Key 1 shortcuts
-SC002:: {
-	SendInput "{SC002}"	; touche & (1)
-	Sleep 210
+; SC002:: {
+; 	SendInput "{SC002}"	; touche & (1)
+; 	Sleep 150
 
-	SendInput "{SC003}"	; touche é (2)
-	Sleep 150
+; 	SendInput "{SC003}"	; touche é (2)
+; 	Sleep 210
 
-	SendInput "{SC004}"	; touche " (3)
-	Sleep 120
+; 	SendInput "{SC004}"	; touche " (3)
+; 	Sleep 120
 
-	SendInput "{SC005}"	; touche ' (4)
-	Sleep 120
+; 	SendInput "{SC005}"	; touche ' (4)
+; 	Sleep 120
 
-	SendInput "{SC006}"	; touche ' (5)
-	return
-}
+; 	SendInput "{SC006}"	; touche ' (5)
+; 	return
+; }
 
 ; Key 2 shortcut
 ; SC003:: {
@@ -97,8 +97,25 @@ SC002:: {
 
 
 ;
-; 3.20 SANCTUM RUTHLESS
+; 3.20-21
 ;
+
+;
+; Pathfinder auto life flask every 5.20s
+;
+; global FireLifeFlask := false
+
+; SC002:: {
+; 	global
+; 	FireLifeFlask := !FireLifeFlask
+
+; 	While (FireLifeFlask == true) {
+; 		ControlSend "{SC002}",, "Path of Exile"
+; 		Sleep 5200
+; 	}
+
+; return
+; }
 
 ;
 ; Auto trigger Guard skill (Molten Shell, IC, Steelskin...) when firing another skill 
@@ -106,13 +123,13 @@ SC002:: {
 ~z::
 ~a:: {
 		While (GetKeyState("a", "P")) or (GetKeyState("z", "P")) {		; 
-		; SendInput "{r down}"			; Fire the guard skill
-		; Sleep 600
+		SendInput "{r down}"			; Fire the guard skill
+		; Sleep 500
 		SendInput "{t down}"			; Fire the guard skill
-		Sleep 1000
+		; Sleep 1000
 	}
 	
-	; SendInput "{r up}"					; Release EC key
+	SendInput "{r up}"					; Release EC key
 	SendInput "{t up}"					; Release EC key
 return
 }
@@ -125,6 +142,7 @@ return
 ; 3.19 KALANDRA
 ;
 
+
 ;
 ; RF build - auto trigger Enduring Cry (EC) while moving
 ;
@@ -135,15 +153,14 @@ return
 ; 			Sleep 1000
 ; 		}
 ; 	}
-	
 ; 	SendInput "{r up}"						; Release EC key
 ; return
 ; }
 
+
 ;
 ; Auto triggers General's Cry (GC) while doing main attack (Shift + left clic)
 ;
-
 ; ~SHIFT::
 ; 	; SendInput "{a} 						; Send this key once
 

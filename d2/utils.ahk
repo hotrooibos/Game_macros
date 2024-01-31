@@ -36,12 +36,14 @@ global visibleGui := 0
 ;
 ;	Fast stashing (ctrl clic)
 ;
+<::
 ^<::
-{				            ; On pressing "Ctrl + <"  (" ^ for Ctrl, ^+ for CtrlShift)...
-	click			            ; ...simulate a mouse left clic
+{
+	click
 	Sleep 100
     return
 }
+
 
 ;
 ;	Suspend hotkeys with button ² (under Esc)

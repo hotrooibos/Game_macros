@@ -18,9 +18,9 @@ userTime := InputBox("Counter time (in second)")
 ; MOUSE SHORTCUTS ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;
+
 ; Precast with Middle mouse btn
-;
+
 MButton::
 {
     ; if (toggle)
